@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Discount, ICoupon, Product } from "../../types";
+import { Coupon, Discount, Product } from "../../types";
 
 interface Props {
   products: Product[];
-  coupons: ICoupon[];
+  coupons: Coupon[];
   onProductUpdate: (updatedProduct: Product) => void;
   onProductAdd: (newProduct: Product) => void;
-  onCouponAdd: (newCoupon: ICoupon) => void;
+  onCouponAdd: (newCoupon: Coupon) => void;
 }
 
 export const AdminPage = ({
@@ -22,7 +22,7 @@ export const AdminPage = ({
     quantity: 0,
     rate: 0,
   });
-  const [newCoupon, setNewCoupon] = useState<ICoupon>({
+  const [newCoupon, setNewCoupon] = useState<Coupon>({
     name: "",
     code: "",
     discountType: "percentage",

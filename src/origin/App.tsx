@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ICoupon, Product } from "../types.ts";
+import { Coupon, Product } from "../types.ts";
 import { AdminPage } from "./components/AdminPage.tsx";
 import { CartPage } from "./components/CartPage.tsx";
 
@@ -30,7 +30,7 @@ const initialProducts: Product[] = [
   },
 ];
 
-const initialCoupons: ICoupon[] = [
+const initialCoupons: Coupon[] = [
   {
     name: "5000원 할인 쿠폰",
     code: "AMOUNT5000",
@@ -47,7 +47,7 @@ const initialCoupons: ICoupon[] = [
 
 const App = () => {
   const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [coupons, setCoupons] = useState<ICoupon[]>(initialCoupons);
+  const [coupons, setCoupons] = useState<Coupon[]>(initialCoupons);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleProductUpdate = (updatedProduct: Product) => {
@@ -60,7 +60,7 @@ const App = () => {
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
-  const handleCouponAdd = (newCoupon: ICoupon) => {
+  const handleCouponAdd = (newCoupon: Coupon) => {
     setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
   };
 

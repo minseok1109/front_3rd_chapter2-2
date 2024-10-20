@@ -1,21 +1,59 @@
-import { CartItem, ICoupon } from "../../../types";
+import { CartItem, Coupon } from "../../../types";
 
 export const calculateItemTotal = (item: CartItem) => {
-  return 0;
+  const total = item.product.price * item.quantity;
+
+  const discountAmount = item.product.discounts.reduce(
+    (maxDiscount, discount) => {
+      if (item.quantity >= discount.quantity) {
+        return Math.max(maxDiscount, total * discount.rate);
+      }
+      return maxDiscount;
+    },
+    0
+  );
+
+  return total - discountAmount;
 };
 
 export const getMaxApplicableDiscount = (item: CartItem) => {
-  return 0;
+  return item.product.discounts.reduce((maxDiscountRate, discount) => {
+    if (item.quantity >= discount.quantity) {
+      return Math.max(discount.rate, 0);
+    }
+    return maxDiscountRate;
+  }, 0);
 };
 
 export const calculateCartTotal = (
   cart: CartItem[],
-  selectedCoupon: ICoupon | null
+  selectedCoupon: Coupon | null
 ) => {
+  const totalBeforeDiscount = cart.reduce(
+    (total, item) => (total += item.product.price * item.quantity),
+    0
+  );
+
+  let totalAfterDiscount = cart.reduce((total, item) => {
+    return (total += calculateItemTotal(item));
+  }, 0);
+
+  let totalDiscount = totalBeforeDiscount - totalAfterDiscount;
+
+  if (selectedCoupon !== null) {
+    if (selectedCoupon.discountType === "amount") {
+      totalAfterDiscount -= selectedCoupon.discountValue;
+      totalDiscount += selectedCoupon.discountValue;
+    } else {
+      totalAfterDiscount -=
+        totalAfterDiscount * (selectedCoupon.discountValue / 100);
+      totalDiscount = totalBeforeDiscount - totalAfterDiscount;
+    }
+  }
   return {
-    totalBeforeDiscount: 0,
-    totalAfterDiscount: 0,
-    totalDiscount: 0,
+    totalBeforeDiscount,
+    totalAfterDiscount,
+    totalDiscount,
   };
 };
 
@@ -24,5 +62,17 @@ export const updateCartItemQuantity = (
   productId: string,
   newQuantity: number
 ): CartItem[] => {
-  return [];
+  console.log("🚀 ~ cart:", cart);
+  const test = cart
+    .map((item) => {
+      if (item.product.id === productId) {
+        const maxStock = item.product.stock;
+        const updatedQuantity = Math.min(newQuantity, maxStock);
+        return { ...item, quantity: updatedQuantity };
+      }
+      return item;
+    })
+    .filter((item) => item.quantity > 0);
+  console.log("🚀 ~ test ~ test:", test);
+  return test;
 };

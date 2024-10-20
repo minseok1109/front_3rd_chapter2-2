@@ -3,7 +3,7 @@ import { useState } from "react";
 import { describe, expect, test } from "vitest";
 import { AdminPage } from "../../refactoring/components/AdminPage";
 import { CartPage } from "../../refactoring/components/CartPage";
-import { ICoupon, Product } from "../../types";
+import { Coupon, Product } from "../../types";
 
 const mockProducts: Product[] = [
   {
@@ -28,7 +28,7 @@ const mockProducts: Product[] = [
     discounts: [{ quantity: 10, rate: 0.2 }],
   },
 ];
-const mockCoupons: ICoupon[] = [
+const mockCoupons: Coupon[] = [
   {
     name: "5000원 할인 쿠폰",
     code: "AMOUNT5000",
@@ -45,7 +45,7 @@ const mockCoupons: ICoupon[] = [
 
 const TestAdminPage = () => {
   const [products, setProducts] = useState<Product[]>(mockProducts);
-  const [coupons, setCoupons] = useState<ICoupon[]>(mockCoupons);
+  const [coupons, setCoupons] = useState<Coupon[]>(mockCoupons);
 
   const handleProductUpdate = (updatedProduct: Product) => {
     setProducts((prevProducts) =>
@@ -57,7 +57,7 @@ const TestAdminPage = () => {
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
-  const handleCouponAdd = (newCoupon: ICoupon) => {
+  const handleCouponAdd = (newCoupon: Coupon) => {
     setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
   };
 

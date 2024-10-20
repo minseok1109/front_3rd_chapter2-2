@@ -12,7 +12,7 @@ import { AdminPage } from "../../refactoring/components/AdminPage";
 import { CartPage } from "../../refactoring/components/CartPage";
 import { useCart, useCoupons, useProducts } from "../../refactoring/hooks";
 import * as cartUtils from "../../refactoring/hooks/utils/cartUtils";
-import { CartItem, ICoupon, Product } from "../../types";
+import { CartItem, Coupon, Product } from "../../types";
 
 const mockProducts: Product[] = [
   {
@@ -37,7 +37,7 @@ const mockProducts: Product[] = [
     discounts: [{ quantity: 10, rate: 0.2 }],
   },
 ];
-const mockCoupons: ICoupon[] = [
+const mockCoupons: Coupon[] = [
   {
     name: "5000원 할인 쿠폰",
     code: "AMOUNT5000",
@@ -54,7 +54,7 @@ const mockCoupons: ICoupon[] = [
 
 const TestAdminPage = () => {
   const [products, setProducts] = useState<Product[]>(mockProducts);
-  const [coupons, setCoupons] = useState<ICoupon[]>(mockCoupons);
+  const [coupons, setCoupons] = useState<Coupon[]>(mockCoupons);
 
   const handleProductUpdate = (updatedProduct: Product) => {
     setProducts((prevProducts) =>
@@ -66,7 +66,7 @@ const TestAdminPage = () => {
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
-  const handleCouponAdd = (newCoupon: ICoupon) => {
+  const handleCouponAdd = (newCoupon: Coupon) => {
     setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
   };
 
@@ -324,7 +324,7 @@ describe("basic > ", () => {
 
     test("쿠폰을 추가할 수 있다", () => {
       const { result } = renderHook(() => useCoupons(mockCoupons));
-      const newCoupon: ICoupon = {
+      const newCoupon: Coupon = {
         name: "New Coupon",
         code: "NEWCODE",
         discountType: "amount",
@@ -390,7 +390,7 @@ describe("basic > ", () => {
       });
 
       test("금액쿠폰을 올바르게 적용해야 합니다.", () => {
-        const coupon: ICoupon = {
+        const coupon: Coupon = {
           name: "Test Coupon",
           code: "TEST",
           discountType: "amount",
@@ -402,7 +402,7 @@ describe("basic > ", () => {
       });
 
       test("퍼센트 쿠폰을 올바르게 적용해야 합니다", () => {
-        const coupon: ICoupon = {
+        const coupon: Coupon = {
           name: "Test Coupon",
           code: "TEST",
           discountType: "percentage",
@@ -447,7 +447,7 @@ describe("basic > ", () => {
       stock: 10,
       discounts: [],
     };
-    const testCoupon: ICoupon = {
+    const testCoupon: Coupon = {
       name: "Test Coupon",
       code: "TEST",
       discountType: "percentage",
