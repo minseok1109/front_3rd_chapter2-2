@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Coupon, Product } from "../types.ts";
+import { ICoupon, Product } from "../types.ts";
 import { AdminPage } from "./components/AdminPage.tsx";
 import { CartPage } from "./components/CartPage.tsx";
 import { initialCoupons, initialProducts } from "./constants.ts";
 
 const App = () => {
   const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [coupons, setCoupons] = useState<Coupon[]>(initialCoupons);
+  const [coupons, setCoupons] = useState<ICoupon[]>(initialCoupons);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleProductUpdate = (updatedProduct: Product) => {
@@ -19,7 +19,7 @@ const App = () => {
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
 
-  const handleCouponAdd = (newCoupon: Coupon) => {
+  const handleCouponAdd = (newCoupon: ICoupon) => {
     setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
   };
 

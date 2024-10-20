@@ -1,4 +1,4 @@
-import { Coupon, Product } from "../types";
+import { ICoupon, Product } from "../types";
 
 export const initialProducts: Product[] = [
   {
@@ -27,7 +27,7 @@ export const initialProducts: Product[] = [
   },
 ];
 
-export const initialCoupons: Coupon[] = [
+export const initialCoupons: ICoupon[] = [
   {
     name: "5000원 할인 쿠폰",
     code: "AMOUNT5000",

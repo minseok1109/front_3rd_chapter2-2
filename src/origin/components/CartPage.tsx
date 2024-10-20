@@ -1,15 +1,15 @@
 import { useState } from "react";
 import ProductList from "../../basic/components/product/ProductList.tsx";
-import { CartItem, Coupon, Product } from "../../types.ts";
+import { CartItem, ICoupon, Product } from "../../types.ts";
 
 interface Props {
   products: Product[];
-  coupons: Coupon[];
+  coupons: ICoupon[];
 }
 
 export const CartPage = ({ products, coupons }: Props) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
+  const [selectedCoupon, setSelectedCoupon] = useState<ICoupon | null>(null);
 
   const addToCart = (product: Product) => {
     const remainingStock = getRemainingStock(product);
@@ -120,7 +120,7 @@ export const CartPage = ({ products, coupons }: Props) => {
     return appliedDiscount;
   };
 
-  const applyCoupon = (coupon: Coupon) => {
+  const applyCoupon = (coupon: ICoupon) => {
     setSelectedCoupon(coupon);
   };
 
