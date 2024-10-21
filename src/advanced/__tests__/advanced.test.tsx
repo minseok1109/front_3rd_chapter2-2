@@ -28,6 +28,7 @@ const mockProducts: Product[] = [
     discounts: [{ quantity: 10, rate: 0.2 }],
   },
 ];
+
 const mockCoupons: Coupon[] = [
   {
     name: "5000원 할인 쿠폰",
