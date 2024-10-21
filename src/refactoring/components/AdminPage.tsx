@@ -142,6 +142,7 @@ export const AdminPage = ({
           >
             {showNewProductForm ? "취소" : "새 상품 추가"}
           </button>
+          {/* 새 상품 추가 폼 */}
           {showNewProductForm && (
             <div className="bg-white p-4 rounded shadow mb-4">
               <h3 className="text-xl font-semibold mb-2">새 상품 추가</h3>
@@ -210,6 +211,7 @@ export const AdminPage = ({
               </button>
             </div>
           )}
+          {/* 상품 목록 */}
           <div className="space-y-2">
             {products.map((product, index) => (
               <div
@@ -362,6 +364,7 @@ export const AdminPage = ({
         <div>
           <h2 className="text-2xl font-semibold mb-4">쿠폰 관리</h2>
           <div className="bg-white p-4 rounded shadow">
+            {/* 새 쿠폰 추가 폼 */}
             <div className="space-y-2 mb-4">
               <input
                 type="text"
@@ -415,6 +418,7 @@ export const AdminPage = ({
                 쿠폰 추가
               </button>
             </div>
+            {/* 현재 쿠폰 목록 */}
             <div>
               <h3 className="text-lg font-semibold mb-2">현재 쿠폰 목록</h3>
               <div className="space-y-2">
