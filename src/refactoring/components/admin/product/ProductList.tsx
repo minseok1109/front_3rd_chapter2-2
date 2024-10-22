@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Product } from "../../../../types";
+import { Button } from "../../atoms/Button";
 import DiscountInfo from "./DiscountInfo";
 import EditProductForm from "./EditProductForm";
 
@@ -63,13 +64,13 @@ const ProductList = ({ products, onProductUpdate }: ProductListProps) => {
               ) : (
                 <div>
                   <DiscountInfo product={product} />
-                  <button
+                  <Button
+                    variant="add"
                     data-testid="modify-button"
                     onClick={() => handleEditProduct(product)}
-                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 mt-2"
                   >
                     수정
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>

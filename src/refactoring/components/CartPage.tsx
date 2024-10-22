@@ -1,5 +1,6 @@
 import { CartItem, Coupon, Product } from "../../types.ts";
 import { useCart } from "../hooks";
+import { Button } from "./atoms/Button.tsx";
 
 interface Props {
   products: Product[];
@@ -88,7 +89,7 @@ export const CartPage = ({ products, coupons }: Props) => {
                       ))}
                     </ul>
                   )}
-                  <button
+                  <Button
                     onClick={() => addToCart(product)}
                     className={`w-full px-3 py-1 rounded ${
                       remainingStock > 0
@@ -98,7 +99,7 @@ export const CartPage = ({ products, coupons }: Props) => {
                     disabled={remainingStock <= 0}
                   >
                     {remainingStock > 0 ? "장바구니에 추가" : "품절"}
-                  </button>
+                  </Button>
                 </div>
               );
             })}
@@ -128,28 +129,28 @@ export const CartPage = ({ products, coupons }: Props) => {
                     </span>
                   </div>
                   <div>
-                    <button
+                    <Button
+                      variant="cart"
                       onClick={() =>
                         updateQuantity(item.product.id, item.quantity - 1)
                       }
-                      className="bg-gray-300 text-gray-800 px-2 py-1 rounded mr-1 hover:bg-gray-400"
                     >
                       -
-                    </button>
-                    <button
+                    </Button>
+                    <Button
+                      variant="cart"
                       onClick={() =>
                         updateQuantity(item.product.id, item.quantity + 1)
                       }
-                      className="bg-gray-300 text-gray-800 px-2 py-1 rounded mr-1 hover:bg-gray-400"
                     >
                       +
-                    </button>
-                    <button
+                    </Button>
+                    <Button
+                      variant="delete"
                       onClick={() => removeFromCart(item.product.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                     >
                       삭제
-                    </button>
+                    </Button>
                   </div>
                 </div>
               );

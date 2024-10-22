@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Discount, Product } from "../../../../types";
+import { Button } from "../../atoms/Button";
 
 interface EditProductFormProps {
   product: Product;
@@ -121,12 +122,12 @@ const EditProductForm = ({
             <span>
               {discount.quantity}개 이상 구매 시 {discount.rate * 100}% 할인
             </span>
-            <button
+            <Button
+              variant="delete"
               onClick={() => handleRemoveDiscount(product.id, index)}
-              className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
             >
               삭제
-            </button>
+            </Button>
           </div>
         ))}
         {/* 새 할인 추가 컴포넌트 */}
@@ -155,12 +156,9 @@ const EditProductForm = ({
             }
             className="w-1/3 p-2 border rounded"
           />
-          <button
-            onClick={() => handleAddDiscount(product.id)}
-            className="w-1/3 bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-          >
+          <Button variant="add" onClick={() => handleAddDiscount(product.id)}>
             할인 추가
-          </button>
+          </Button>
         </div>
       </div>
       {/* 수정 완료 버튼 컴포넌트 */}
