@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Product } from "../../../../types";
+import { Button } from "../../atoms/Button";
 
 const AddProductForm = ({
   onProductAdd,
@@ -28,12 +29,12 @@ const AddProductForm = ({
 
   return (
     <>
-      <button
+      <Button
+        variant="new"
         onClick={() => setShowNewProductForm(!showNewProductForm)}
-        className="bg-green-500 text-white px-4 py-2 rounded mb-4 hover:bg-green-600"
       >
         {showNewProductForm ? "취소" : "새 상품 추가"}
-      </button>
+      </Button>
       {/* 새 상품 추가 폼 */}
       {showNewProductForm && (
         <div className="bg-white p-4 rounded shadow mb-4">
