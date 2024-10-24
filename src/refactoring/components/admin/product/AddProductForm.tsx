@@ -1,3 +1,7 @@
+import {
+  createProductWithId,
+  getInitialProductState,
+} from "@hooks/utils/productUtils";
 import { useState } from "react";
 import { Product } from "../../../../types";
 import { Button } from "../../atoms/Button";
@@ -7,23 +11,15 @@ const AddProductForm = ({
 }: {
   onProductAdd: (newProduct: Product) => void;
 }) => {
+  const initialProductState = getInitialProductState();
   const [showNewProductForm, setShowNewProductForm] = useState(false);
-  const [newProduct, setNewProduct] = useState<Omit<Product, "id">>({
-    name: "",
-    price: 0,
-    stock: 0,
-    discounts: [],
-  });
+  const [newProduct, setNewProduct] =
+    useState<Omit<Product, "id">>(initialProductState);
 
   const handleAddNewProduct = () => {
-    const productWithId = { ...newProduct, id: Date.now().toString() };
+    const productWithId = createProductWithId(newProduct);
     onProductAdd(productWithId);
-    setNewProduct({
-      name: "",
-      price: 0,
-      stock: 0,
-      discounts: [],
-    });
+    setNewProduct(initialProductState);
     setShowNewProductForm(false);
   };
 
@@ -35,7 +31,6 @@ const AddProductForm = ({
       >
         {showNewProductForm ? "취소" : "새 상품 추가"}
       </Button>
-      {/* 새 상품 추가 폼 */}
       {showNewProductForm && (
         <div className="bg-white p-4 rounded shadow mb-4">
           <h3 className="text-xl font-semibold mb-2">새 상품 추가</h3>

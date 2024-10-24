@@ -1,3 +1,4 @@
+import { toggleSetItem } from "@hooks/utils/productUtils";
 import { useState } from "react";
 import { Product } from "../../../../types";
 import { Button } from "../../atoms/Button";
@@ -21,15 +22,7 @@ const ProductList = ({ products, onProductUpdate }: ProductListProps) => {
   const [openProductIds, setOpenProductIds] = useState<Set<string>>(new Set());
 
   const toggleProductAccordion = (productId: string) => {
-    setOpenProductIds((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(productId)) {
-        newSet.delete(productId);
-      } else {
-        newSet.add(productId);
-      }
-      return newSet;
-    });
+    setOpenProductIds((prev) => toggleSetItem(prev, productId));
   };
 
   const handleEditProduct = (product: Product) => {
